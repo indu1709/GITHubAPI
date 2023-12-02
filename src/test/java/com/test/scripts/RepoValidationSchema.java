@@ -29,20 +29,23 @@ public class RepoValidationSchema extends UserServiceHelper {
 	@Test()
 	public void getAllReposSchema() {
 		String mytoken = UserServiceHelper.gettoken();
-		Header header = new Header("token", mytoken);
+	//	Header header = new Header("token", mytoken);
 		System.out.println(myspec);
 		System.out.println(mytoken);
 	
 		Response res=RestAssured
 		.given().log().all()   //logging the info
-		.header(header)
+		.header("Authorization","Bearer" +mytoken)
+		.spec(myspec)
 		.when()
 		.get(EndPoints.GET_ALL_REPOS);
-		res.then().body(JsonSchemaValidator.matchesJsonSchemaInClasspath("GetAllReposSchema.json"));
-		res.then().log();
-		//res.prettyPrint();
+			res.then().log();
+		res.prettyPrint();
 		ReusableMethods.verifyStatusCodeis(res, 200);
 		Assert.assertEquals(res.getContentType(), "application/json; charset=utf-8");
+		res.then().body(JsonSchemaValidator.matchesJsonSchemaInClasspath("GetAllReposSchema.json"));
+		
+		
 		
 		
 	}

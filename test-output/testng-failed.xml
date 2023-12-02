@@ -5,8 +5,8 @@
     <classes>
       <class name="com.test.scripts.SingleRepo">
         <methods>
+          <include name="updateSingleRepo_TC06"/>
           <include name="setUp"/>
-          <include name="getSingleRepoTestCase2"/>
         </methods>
       </class> <!-- com.test.scripts.SingleRepo -->
     </classes>
